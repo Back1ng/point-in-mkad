@@ -3,7 +3,7 @@ Detect, if point in Moscow Ring Road (MKAD)
 
 ## Using:
 
-```
+```php
    <?php
    
    use Back1ng\PointInMkad\Detector;
@@ -20,7 +20,7 @@ Detect, if point in Moscow Ring Road (MKAD)
 ## Choose closest point of Mkad
 
 To select the closest point from the Moscow Ring Road to yours, use the following method
-```
+```php
     <?php
     
      use Back1ng\PointInMkad\Detector;
@@ -34,7 +34,7 @@ To select the closest point from the Moscow Ring Road to yours, use the followin
 
 This method uses the Vincents formula to calculate the distance in meters as accurately as possible
 
-```
+```php
     <?php
     
      use Back1ng\PointInMkad\Detector;
