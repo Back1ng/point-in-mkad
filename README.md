@@ -7,6 +7,7 @@ Available polygons:
 <ul>
     <li>Moscow Ring Road</li> 
     <li>St. Petersburg Ring Road.</li>
+    <li>Yekaterinburg Ring Road.</li>
 </ul>
 
 ## Using:

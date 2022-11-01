@@ -22,7 +22,7 @@ class Detector
     public function getClosestPoint(Coordinate $desiredCoordinate): Coordinate
     {
         $minimalDistance = null;
-        $closesPoint = null;
+        $closestPoint = null;
 
         foreach ($this->coordinates->get() as $coordinate) {
             $distance = $this->calculator->getDistance(
@@ -32,11 +32,11 @@ class Detector
 
             if (! isset($minimalDistance) || $distance < $minimalDistance) {
                 $minimalDistance = $distance;
-                $closesPoint = new Coordinate($coordinate[1], $coordinate[0]);
+                $closestPoint = new Coordinate($coordinate[1], $coordinate[0]);
             }
         }
 
-        return $closesPoint;
+        return $closestPoint;
     }
 
     public function isPointInPolygon(Coordinate $desiredCoordinate): bool
