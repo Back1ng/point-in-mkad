@@ -2,73 +2,28 @@
 
 namespace Back1ng\PointInMkad;
 
-use Geometry\Polygon;
 use Location\Coordinate;
+use Location\Distance\DistanceInterface;
 use Location\Distance\Vincenty;
 
 class Detector
 {
-    private Coordinate $closestPoint;
-
-    private float $distanceFromCenterToCoordinate;
-
-    private float $distanceFromCenterToMkad;
-
     public function __construct(
-        private readonly Coordinate $desiredCoordinate,
+        private readonly CoordinatePolygon $coordinates = new MoscowRingRoadPolygon(),
+        private readonly DistanceInterface $calculator = new Vincenty(),
     ) {
-        $moscowRingRoad = new MoscowRingRoad();
-
-        $polygon = new Polygon($moscowRingRoad->getCoordinates());
-
-        $calculator = new Vincenty();
-
-        $centroid = $polygon->centroid();
-        $centroid = new Coordinate(
-            $centroid[1],
-            $centroid[0],
-        );
-
-        $this->closestPoint = $this->calculateClosestPoint(
-            $moscowRingRoad->getCoordinates(),
-            $this->desiredCoordinate,
-        );
-
-        $this->distanceFromCenterToCoordinate = $calculator->getDistance(
-            $centroid, $this->desiredCoordinate
-        );
-
-        $this->distanceFromCenterToMkad = $calculator->getDistance(
-            $centroid, $this->closestPoint,
-        );
+        if (! $this->coordinates->isValid()) {
+            throw new \InvalidArgumentException('CoordinatePolygon class has no valid Polygon.');
+        }
     }
 
-    public function getClosestPoint(): Coordinate
+    public function getClosestPoint(Coordinate $desiredCoordinate): Coordinate
     {
-        return $this->closestPoint;
-    }
-
-    public function isMkad(): bool
-    {
-        return $this->distanceFromCenterToCoordinate < $this->distanceFromCenterToMkad;
-    }
-
-    public function getDistanceFromMkadToCoordinate(): float
-    {
-        return (new Vincenty())->getDistance(
-            $this->closestPoint, $this->desiredCoordinate,
-        );
-    }
-
-    private function calculateClosestPoint(array $coordinates, Coordinate $desiredCoordinate): Coordinate
-    {
-        $calculator = new Vincenty();
-
         $minimalDistance = null;
         $closesPoint = null;
 
-        foreach ($coordinates as $coordinate) {
-            $distance = $calculator->getDistance(
+        foreach ($this->coordinates->get() as $coordinate) {
+            $distance = $this->calculator->getDistance(
                 new Coordinate($coordinate[1], $coordinate[0]),
                 $desiredCoordinate,
             );
@@ -80,5 +35,27 @@ class Detector
         }
 
         return $closesPoint;
+    }
+
+    public function isPointInPolygon(Coordinate $desiredCoordinate): bool
+    {
+        $centroid = $this->coordinates->getCentroid();
+
+        $distanceFromCenterToCoordinate = $this->calculator->getDistance(
+            $centroid, $desiredCoordinate
+        );
+
+        $distanceFromCenterToOutlinePolygon = $this->calculator->getDistance(
+            $centroid, $this->getClosestPoint($desiredCoordinate),
+        );
+
+        return $distanceFromCenterToCoordinate <= $distanceFromCenterToOutlinePolygon;
+    }
+
+    public function getDistanceFromOutlinePolygonToCoordinate(Coordinate $coordinate): float
+    {
+        return $this->calculator->getDistance(
+            $this->getClosestPoint($coordinate), $coordinate,
+        );
     }
 }

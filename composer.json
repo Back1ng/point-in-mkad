@@ -19,7 +19,8 @@
   },
   "autoload": {
     "psr-4": {
-      "Back1ng\\PointInMkad\\": "src/"
+      "Back1ng\\PointInMkad\\": "src/",
+      "Back1ng\\Tests\\": "tests/"
     }
   }
 }

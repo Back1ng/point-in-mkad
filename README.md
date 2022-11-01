@@ -1,5 +1,5 @@
 # point-in-mkad
-Detect, if point in Moscow Ring Road (MKAD)
+Detect, if point in polygon, by default - in Moscow Ring Road (MKAD)
 
 ## Using:
 
@@ -9,37 +9,70 @@ Detect, if point in Moscow Ring Road (MKAD)
    use Back1ng\PointInMkad\Detector;
    use Location\Coordinate;
    
+   $detector = new Detector();
    $desiredCoordinate = new Coordinate(55.720375, 37.639101);
-   $detector = new Detector($desiredCoordinate);
    
-   if ($detector->isMkad()) {
+   if ($detector->isPointInPolygon($desiredCoordinate)) {
        // do smth...
    }
 ```
 
-## Choose closest point of Mkad
+## Choose closest point of polygon
 
 To select the closest point from the Moscow Ring Road to yours, use the following method
 ```php
     <?php
     
-     use Back1ng\PointInMkad\Detector;
-     
-     // creating detector...
-     
-     $detector->getClosestPoint(); // Will return Location\Coordinate
+    use Back1ng\PointInMkad\Detector;
+    
+    // creating detector...
+    
+    $detector->getClosestPoint($desiredCoordinate); // Will return Location\Coordinate
 ```
 
-## You can also determine the distance from the Moscow Ring Road to your point, use the following code
+## You can also determine the distance from the outline polygon to your point
 
-This method uses the Vincents formula to calculate the distance in meters as accurately as possible
+This method uses the implementation of calculator (<b>Vincents formula</b> by default),
+to calculate the distance in meters as accurately as possible
 
 ```php
     <?php
     
-     use Back1ng\PointInMkad\Detector;
-     
-     // creating detector...
-     
-     $detector->getDistanceFromMkadToCoordinate(); // Will return float of distance in meters
+    use Back1ng\PointInMkad\Detector;
+    
+    // creating detector...
+    
+    $detector->getDistanceFromOutlinePolygonToCoordinate($desiredCoordinate): float;
+```
+
+## Implementing your own polygon
+
+Need to create a class from ```Back1ng\PointInMkad\CoordinatePolygon``` 
+and override parent method ```get()```
+
+```php
+    <?php
+
+    use Back1ng\PointInMkad\CoordinatePolygon;
+
+    class CustomPolygon extends CoordinatePolygon
+    {
+        public function get(): array
+        {
+            return [
+                [1, 0],
+                [1, 1],
+                [0, 1],
+            ]
+        }
+    }
+```
+
+Then you can validate this polygon and get centroid.
+
+```php
+    $polygon = new CustomPolygon();
+
+    $polygon->isValid(); // true
+    $polygon->getCentroid(); // Location\Coordinate
 ```

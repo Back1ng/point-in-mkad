@@ -1,29 +1,31 @@
 <?php
 
+namespace Back1ng\Tests;
+
 use Location\Coordinate;
 use PHPUnit\Framework\TestCase;
 use Back1ng\PointInMkad\Detector;
 
-class DetectorTest extends TestCase
+class MkadDetectorTest extends TestCase
 {
     /**
      * @dataProvider mkadCoordinateProvider
      */
-    public function testCoordinateCorrectDetectInMkad(Coordinate $coordinate)
+    public function testCoordinateCorrectDetectInMkad(Coordinate $coordinate): void
     {
-        $detector = new Detector($coordinate);
+        $detector = new Detector();
 
-        $this->assertTrue($detector->isMkad());
+        $this->assertTrue($detector->isPointInPolygon($coordinate));
     }
 
     /**
      * @dataProvider outsideMkadCoordinateProvider
      */
-    public function testCoordinateCorrectDetectOutsideMkad(Coordinate $coordinate)
+    public function testCoordinateCorrectDetectOutsideMkad(Coordinate $coordinate): void
     {
-        $detector = new Detector($coordinate);
+        $detector = new Detector();
 
-        $this->assertFalse($detector->isMkad());
+        $this->assertFalse($detector->isPointInPolygon($coordinate));
     }
 
     public function mkadCoordinateProvider(): array
