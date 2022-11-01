@@ -2,3 +2,6 @@ composer.lock
 phpunit.xml
 vendor/
 .idea/
+infection.log
+.phpunit.cache/
+.php-cs-fixer.cache

@@ -2,6 +2,8 @@
 
 namespace Back1ng\PointInMkad;
 
+use Back1ng\PointInMkad\Polygons\CoordinatePolygon;
+use Back1ng\PointInMkad\Polygons\MoscowRingRoadPolygon;
 use Location\Coordinate;
 use Location\Distance\DistanceInterface;
 use Location\Distance\Vincenty;
@@ -13,7 +15,7 @@ class Detector
         private readonly DistanceInterface $calculator = new Vincenty(),
     ) {
         if (! $this->coordinates->isValid()) {
-            throw new \InvalidArgumentException('CoordinatePolygon class has no valid Polygon.');
+            throw new \InvalidArgumentException(sprintf('%s class has no valid Polygon.', CoordinatePolygon::class));
         }
     }
 
@@ -42,11 +44,13 @@ class Detector
         $centroid = $this->coordinates->getCentroid();
 
         $distanceFromCenterToCoordinate = $this->calculator->getDistance(
-            $centroid, $desiredCoordinate
+            $centroid,
+            $desiredCoordinate
         );
 
         $distanceFromCenterToOutlinePolygon = $this->calculator->getDistance(
-            $centroid, $this->getClosestPoint($desiredCoordinate),
+            $centroid,
+            $this->getClosestPoint($desiredCoordinate),
         );
 
         return $distanceFromCenterToCoordinate <= $distanceFromCenterToOutlinePolygon;
@@ -55,7 +59,8 @@ class Detector
     public function getDistanceFromOutlinePolygonToCoordinate(Coordinate $coordinate): float
     {
         return $this->calculator->getDistance(
-            $this->getClosestPoint($coordinate), $coordinate,
+            $this->getClosestPoint($coordinate),
+            $coordinate,
         );
     }
 }

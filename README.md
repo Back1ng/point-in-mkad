@@ -1,5 +1,13 @@
 # point-in-mkad
 Detect, if point in polygon, by default - in Moscow Ring Road (MKAD)
+<br>
+
+Available polygons: 
+
+<ul>
+    <li>Moscow Ring Road</li> 
+    <li>St. Petersburg Ring Road.</li>
+</ul>
 
 ## Using:
 
@@ -53,7 +61,7 @@ and override parent method ```get()```
 ```php
     <?php
 
-    use Back1ng\PointInMkad\CoordinatePolygon;
+    use Back1ng\PointInMkad\Polygons\CoordinatePolygon;
 
     class CustomPolygon extends CoordinatePolygon
     {

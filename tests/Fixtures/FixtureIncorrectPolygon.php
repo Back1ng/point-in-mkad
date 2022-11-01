@@ -2,7 +2,7 @@
 
 namespace Back1ng\Tests\Fixtures;
 
-use Back1ng\PointInMkad\CoordinatePolygon;
+use Back1ng\PointInMkad\Polygons\CoordinatePolygon;
 
 class FixtureIncorrectPolygon extends CoordinatePolygon
 {

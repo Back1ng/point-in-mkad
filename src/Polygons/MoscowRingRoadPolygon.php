@@ -1,6 +1,6 @@
 <?php
 
-namespace Back1ng\PointInMkad;
+namespace Back1ng\PointInMkad\Polygons;
 
 class MoscowRingRoadPolygon extends CoordinatePolygon
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Back1ng\PointInMkad;
+namespace Back1ng\PointInMkad\Polygons;
 
 use Geometry\Polygon;
 use Location\Coordinate;
@@ -8,6 +8,8 @@ use Location\Coordinate;
 abstract class CoordinatePolygon
 {
     /**
+     * Because some problems, has reverse latitude and longitude
+     *
      * Contains coordinates for some polygon
      * Example: [[1,0], [1,1], [0,1]]
      *
