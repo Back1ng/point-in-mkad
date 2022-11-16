@@ -28,6 +28,7 @@ abstract class CoordinatePolygon
     {
         $polygon = new Polygon($this->get());
 
+        /** @var array<float> $centroid */
         $centroid = $polygon->centroid();
 
         return new Coordinate(
