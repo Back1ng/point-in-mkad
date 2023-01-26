@@ -4,6 +4,7 @@ namespace Back1ng\PointInMkad;
 
 use Back1ng\PointInMkad\Polygons\CoordinatePolygon;
 use Back1ng\PointInMkad\Polygons\MoscowRingRoadPolygon;
+use InvalidArgumentException;
 use Location\Coordinate;
 use Location\Distance\DistanceInterface;
 use Location\Distance\Vincenty;
@@ -15,7 +16,7 @@ class Detector
         private readonly DistanceInterface $calculator = new Vincenty(),
     ) {
         if (! $this->coordinates->isValid()) {
-            throw new \InvalidArgumentException(sprintf('%s class has no valid Polygon.', CoordinatePolygon::class));
+            throw new InvalidArgumentException(sprintf('%s class has no valid Polygon.', CoordinatePolygon::class));
         }
     }
 
@@ -35,7 +36,7 @@ class Detector
         }
 
         if (!isset($closestPoint)) {
-            throw new \InvalidArgumentException('Closest point not founded.');
+            throw new InvalidArgumentException('Closest point not founded.');
         }
 
         /** @var Coordinate */

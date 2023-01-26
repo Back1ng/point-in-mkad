@@ -13,7 +13,7 @@ abstract class CoordinatePolygon
      * Contains coordinates for some polygon
      * Example: [[1,0], [1,1], [0,1]]
      *
-     * @return array
+     * @return non-empty-array<int, array{scalar, scalar}>
      */
     abstract public function get(): array;
 

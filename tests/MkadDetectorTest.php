@@ -28,6 +28,9 @@ class MkadDetectorTest extends TestCase
         $this->assertFalse($detector->isPointInPolygon($coordinate));
     }
 
+    /**
+     * @return array<array{Coordinate}>
+     */
     public function mkadCoordinateProvider(): array
     {
         return [
@@ -39,6 +42,9 @@ class MkadDetectorTest extends TestCase
         ];
     }
 
+    /**
+     * @return array<array{Coordinate}>
+     */
     public function outsideMkadCoordinateProvider(): array
     {
         return [

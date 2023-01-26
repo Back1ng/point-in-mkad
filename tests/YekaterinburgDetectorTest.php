@@ -33,6 +33,9 @@ class YekaterinburgDetectorTest extends TestCase
         $this->assertFalse($detector->isPointInPolygon($coordinate));
     }
 
+    /**
+     * @return array<array{Coordinate}>
+     */
     public function yekaterinburgCoordinateProvider(): array
     {
         return [
@@ -44,6 +47,9 @@ class YekaterinburgDetectorTest extends TestCase
         ];
     }
 
+    /**
+     * @return array<array{Coordinate}>
+     */
     public function outsideYekaterinburgCoordinateProvider(): array
     {
         return [

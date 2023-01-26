@@ -11,7 +11,7 @@ use PHPUnit\Framework\TestCase;
 
 class CustomPolygonTest extends TestCase
 {
-    public function testDetectCentroid()
+    public function testDetectCentroid(): void
     {
         $polygon = new FixtureCustomPolygon();
 
@@ -21,21 +21,21 @@ class CustomPolygonTest extends TestCase
         );
     }
 
-    public function testCustomPolygonIsValid()
+    public function testCustomPolygonIsValid(): void
     {
         $polygon = new FixtureCustomPolygon();
 
         $this->assertTrue($polygon->isValid());
     }
 
-    public function testIncorrectPolygonIsNotValid()
+    public function testIncorrectPolygonIsNotValid(): void
     {
         $polygon = new FixtureIncorrectPolygon();
 
         $this->assertFalse($polygon->isValid());
     }
 
-    public function testDetectorCanUseAnotherCalculator()
+    public function testDetectorCanUseAnotherCalculator(): void
     {
         $detector = new Detector(
             coordinates: new FixtureCustomPolygon(),
