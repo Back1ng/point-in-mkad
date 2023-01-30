@@ -1,8 +1,8 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Back1ng\PointInMkad\Polygons;
 
-class YekaterinburgRingRoadPolygon extends CoordinatePolygon
+final class YekaterinburgRingRoadPolygon extends CoordinatePolygon
 {
     public function get(): array
     {

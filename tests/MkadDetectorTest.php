@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Back1ng\Tests;
 
@@ -6,7 +6,7 @@ use Location\Coordinate;
 use PHPUnit\Framework\TestCase;
 use Back1ng\PointInMkad\Detector;
 
-class MkadDetectorTest extends TestCase
+final class MkadDetectorTest extends TestCase
 {
     /**
      * @dataProvider mkadCoordinateProvider

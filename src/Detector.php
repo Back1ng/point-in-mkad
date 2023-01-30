@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Back1ng\PointInMkad;
 
@@ -9,7 +9,7 @@ use Location\Coordinate;
 use Location\Distance\DistanceInterface;
 use Location\Distance\Vincenty;
 
-class Detector
+final class Detector
 {
     public function __construct(
         private readonly CoordinatePolygon $coordinates = new MoscowRingRoadPolygon(),

@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Back1ng\Tests;
 
@@ -9,7 +9,7 @@ use Location\Coordinate;
 use Location\Distance\Haversine;
 use PHPUnit\Framework\TestCase;
 
-class CustomPolygonTest extends TestCase
+final class CustomPolygonTest extends TestCase
 {
     public function testDetectCentroid(): void
     {

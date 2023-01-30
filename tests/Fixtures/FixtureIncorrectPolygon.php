@@ -1,10 +1,10 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Back1ng\Tests\Fixtures;
 
 use Back1ng\PointInMkad\Polygons\CoordinatePolygon;
 
-class FixtureIncorrectPolygon extends CoordinatePolygon
+final class FixtureIncorrectPolygon extends CoordinatePolygon
 {
     public function get(): array
     {

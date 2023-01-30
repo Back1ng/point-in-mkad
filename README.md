@@ -85,3 +85,10 @@ Then you can validate this polygon and get centroid.
     $polygon->isValid(); // true
     $polygon->getCentroid(); // Location\Coordinate
 ```
+
+How to use new polygon?
+```php
+    $polygon = new CustomPolygon();
+
+    $detector = new \Back1ng\PointInMkad\Detector(coordinates: $polygon);
+```
