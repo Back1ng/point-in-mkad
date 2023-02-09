@@ -3,3 +3,7 @@ parameters:
 	paths:
 		- src
 		- tests
+
+	ignoreErrors:
+	    - '#is not allowed to extend#'
+	    - '#Language construct isset\(\) should not be used#'
