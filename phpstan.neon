@@ -7,3 +7,4 @@ parameters:
 	ignoreErrors:
 	    - '#is not allowed to extend#'
 	    - '#Language construct isset\(\) should not be used#'
+	    - '#with default value.#'
